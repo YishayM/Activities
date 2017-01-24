@@ -3,17 +3,29 @@ import json
 from datetime import datetime
 from sklearn.cluster import KMeans
 from geopy.geocoders import Nominatim
+import location_history_json_converter
+
 # TODO
 # 1. GUI
 # 2. locaion visualitor
 # 3. finding new places
 # 4.
 CLUSTERS_NUM = 1000
-CURRENT_LAT = 31.780201
-CURRENT_LONG = 35.199995
+
+CURRENT_LAT = 31.865013
+CURRENT_LONG = 34.985318
+NEXT_HOURS = 1
+
+
+# CURRENT_LAT = 31.780201
+# CURRENT_LONG = 35.199995
+PATH = '/cs/usr/merzbach/locations/TakeoutYair/Location/'
+FILE_NAME = 'LocationHistory.json'
+PARSED_NAME =  'LocationHistoryParsed.json'
 
 def main():
-    with open('/cs/usr/merzbach/locations/Takeout/Location/LocationHistoryParsed.json') as data_file:
+    location_history_json_converter.convert_json_and_save(PATH+FILE_NAME);
+    with open(PATH+PARSED_NAME) as data_file:
         jsonData = json.load(data_file)
     locations = []
     days = []
@@ -52,7 +64,7 @@ def convertTimestampToDate(ms):
 
 def generateEntry():
     #prediction for the next hour
-    entry = [datetime.today().weekday(),datetime.today().hour + 1,preparePoint(CURRENT_LAT), preparePoint(CURRENT_LONG)]
+    entry = [datetime.today().weekday(),datetime.today().hour + NEXT_HOURS,preparePoint(CURRENT_LAT), preparePoint(CURRENT_LONG)]
     print "current entry:"
     print entry
     return entry;
