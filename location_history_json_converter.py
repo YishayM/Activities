@@ -7,20 +7,6 @@ from argparse import ArgumentParser
 import argparse
 from datetime import datetime
 
-def valid_date(s):
-    try:
-        return datetime.strptime(s, "%Y-%m-%d")
-    except ValueError:
-        msg = "Not a valid date: '{0}'.".format(s)
-        raise argparse.ArgumentTypeError(msg)
-
-def dateCheck(timestampms):
-    global args
-    dt = datetime.fromtimestamp(int(timestampms) / 1000)
-    if args.startdate and args.startdate > dt : return False
-    if args.enddate and args.enddate < dt : return False
-    return True
-
 def convert_json_and_save(path):
     args =[]
     input = path
@@ -68,8 +54,6 @@ def convert_json_and_save(path):
             f_out.write("  }\n}")
             if format == "js":
                 f_out.write(";")
-
-
 
 
         f_out.close()

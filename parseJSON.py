@@ -12,14 +12,15 @@ import location_history_json_converter
 # 4.
 CLUSTERS_NUM = 1000
 
-CURRENT_LAT = 31.865013
-CURRENT_LONG = 34.985318
+#
+# CURRENT_LAT = 31.865013
+# CURRENT_LONG = 34.985318
 NEXT_HOURS = 1
 
-
-# CURRENT_LAT = 31.780201
-# CURRENT_LONG = 35.199995
-PATH = '/cs/usr/merzbach/locations/TakeoutYair/Location/'
+# GIVAT RAM
+CURRENT_LAT = 31.780201
+CURRENT_LONG = 35.199995
+PATH = '//cs/usr/merzbach/locations/Takeout2/Takeout/Location/'
 FILE_NAME = 'LocationHistory.json'
 PARSED_NAME =  'LocationHistoryParsed.json'
 
