@@ -109,9 +109,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='1042146476103-sn1gth540kvtgd5q2j6oi84h053qani0.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='dJYcjkagmQ1xYvrhBzmIPbgb'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
