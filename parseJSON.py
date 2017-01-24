@@ -8,12 +8,12 @@ from geopy.geocoders import Nominatim
 # 2. locaion visualitor
 # 3. finding new places
 # 4.
-CLUSTERS_NUM = 300
+CLUSTERS_NUM = 1000
 CURRENT_LAT = 31.780201
 CURRENT_LONG = 35.199995
 
 def main():
-    with open('/cs/stud/merzbach/safe/activities/Takeout/Location/LocationHistoryParsed.json') as data_file:
+    with open('/cs/usr/merzbach/locations/Takeout/Location/LocationHistoryParsed.json') as data_file:
         jsonData = json.load(data_file)
     locations = []
     days = []
@@ -33,7 +33,7 @@ def preparePoint(point):
 
 
 def ExtractPoint(point):
-    newPoint = (point/100) - 30
+    newPoint = (point/100) + 30
 
     return newPoint;
 
@@ -51,7 +51,8 @@ def convertTimestampToDate(ms):
 
 
 def generateEntry():
-    entry = [datetime.today().weekday(),datetime.today().hour,preparePoint(CURRENT_LAT), preparePoint(CURRENT_LONG)]
+    #prediction for the next hour
+    entry = [datetime.today().weekday(),datetime.today().hour + 1,preparePoint(CURRENT_LAT), preparePoint(CURRENT_LONG)]
     print "current entry:"
     print entry
     return entry;
@@ -65,8 +66,12 @@ def learnSamples(X):
 
 def predictEntry(entry, model):
     clusterLabel = (model.predict(entry));
+    print "this is the label data - center"
     print (model.cluster_centers_[clusterLabel])
-    print getAddress(ExtractPoint(model.cluster_centers_[clusterLabel][0][2]),ExtractPoint(model.cluster_centers_[clusterLabel][0][3]))
+    lat = ExtractPoint(model.cluster_centers_[clusterLabel][0][2])
+    long = ExtractPoint(model.cluster_centers_[clusterLabel][0][3])
+    print (lat,long)
+    print getAddress(lat,long)
 
 
 
